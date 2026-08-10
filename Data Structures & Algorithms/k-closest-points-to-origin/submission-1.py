@@ -1,11 +1,13 @@
 class Solution:
-    def kClosest(self, points: List[List[int]], k: int) -> List[List[int]]:
-        import heapq
-        import math
-        h=[]
-        res=[]
-        for i in range(len(points)):
-            heapq.heappush(h,((math.sqrt(points[i][0]**2 + points[i][1]**2),points[i]))) 
-        for i in range(k):
-            res.append(heapq.heappop(h)[1])
-        return res
+    def lastStoneWeight(self, stones: List[int]) -> int:
+        stones = [stone * -1 for stone in stones]
+        heapq.heapify(stones)
+
+        while len(stones) >= 2:
+            print(stones)
+            x = heapq.heappop(stones)
+            y = heapq.heappop(stones)
+            x = x-y
+            
+            heapq.heappush(stones,x)
+        return stones[0]*-1
